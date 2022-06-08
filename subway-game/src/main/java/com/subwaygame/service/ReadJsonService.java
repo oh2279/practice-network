@@ -28,7 +28,7 @@ public class ReadJsonService {
 
     public void getJsonAndStart() throws IOException, ParseException{
         JSONParser parser = new JSONParser();
-        Reader reader = new FileReader("C:\\Users\\KANG\\Desktop\\CN\\CN_project\\subway-game\\src\\main\\java\\com\\subwaygame\\service\\subwayInfo.json");
+        Reader reader = new FileReader("C:\\Users\\KANG\\Desktop\\asd\\CN_project-main\\subway-game\\src\\main\\java\\com\\subwaygame\\service\\subwayInfo.json");
         JSONObject jsonObject = (JSONObject) parser.parse(reader);
         data = (JSONArray) jsonObject.get("DATA");
         log.info("ReadJson");

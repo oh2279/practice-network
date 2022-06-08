@@ -15,7 +15,6 @@ public class ChatService {
 
     private ArrayList<String> subwayList = new ArrayList<>();
 
-
     public Boolean checkDuplicate(String parsedMsg) {
         for (String subway : subwayList) {
             if (subway.equals(parsedMsg)) {
