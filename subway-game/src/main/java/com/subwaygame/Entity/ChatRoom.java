@@ -46,6 +46,9 @@ public class ChatRoom {
             sessions.remove(session);
             chatMessage.setMessage(chatMessage.getWriter() + "님이 퇴장하셨습니다.");
             ChatHandler.userCount--;
+            if (ChatHandler.userCount == 0){
+                welcome = false;
+            }
         }
         else if(chatMessage.getType() == MessageType.START){
             chatMessage.setMessage("게임이 시작되었습니다.");
@@ -55,9 +58,11 @@ public class ChatRoom {
         else if(chatMessage.getType() == MessageType.SUBWAYLINE){
             chatMessage.setMessage("아~ " + randomLine + "~ " + randomLine+ "~ " + randomLine + randomLine + randomLine + "!!");
         }
-        else if(chatMessage.getType() == MessageType.END){
-            chatMessage.setMessage("게임이 종료되었습니다.");
-            ChatHandler.userCount=0;
+        else if(chatMessage.getType() == MessageType.END){ // 이땐 randomLine이 패배자
+
+            chatMessage.setMessage(randomLine + "님의 패배!");
+            send(chatMessage,objectMapper);
+            chatMessage.setMessage("게임이 종료되었습니다. 다시 하고 싶다면 '게임시작' 채팅을 해주세요.");
         }
         else{
             chatMessage.setMessage(chatMessage.getWriter() + " : " + chatMessage.getMessage());
@@ -67,7 +72,7 @@ public class ChatRoom {
             chatMessage.setMessage("현재 있는 유저 수 : " + ChatHandler.userCount);
             send(chatMessage, objectMapper);
             if(ChatHandler.userCount==2){
-                chatMessage.setMessage(chatMessage.getWriter() + "님이 아무 채팅으로 게임을 시작할 수 있습니다.");
+                chatMessage.setMessage(chatMessage.getWriter() + "님이 '게임시작' 채팅으로 게임을 시작할 수 있습니다.");
                 send(chatMessage, objectMapper);
             }
         }
